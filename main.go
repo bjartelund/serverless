@@ -25,7 +25,10 @@ import (
 func main() {
 	// Handle requests to "/" by responding with a random joke from the tortune lib.
 	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-		fmt.Fprint(w, tortune.HitMe())
+		fmt.Fprintln(
+			w,
+			tortune.HitMe(),
+		)
 	})
 
 	// Listen on incoming TCP requests to $PORT or default to 8080.
