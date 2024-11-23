@@ -19,15 +19,20 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/helloworlddan/tortune/tortune"
+	"github.com/helloworlddan/tortuneai/tortuneai"
 )
 
 func main() {
 	// Handle requests to "/" by responding with a random joke from the tortune lib.
 	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
+		joke, err := tortuneai.HitMe("you are a really funny chatbot providing one-liners about computers","devfest24ber-9356")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 		fmt.Fprintln(
 			w,
-			tortune.HitMe(),
+			joke,
 		)
 	})
 
